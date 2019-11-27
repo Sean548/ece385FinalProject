@@ -19,7 +19,8 @@ module  Mario ( input         Clk,                // 50 MHz clock
                              frame_clk,          // The clock indicating a new frame (~60Hz)
                input [9:0]   DrawX, DrawY,       // Current pixel coordinates
 					input [3:0]  keymove,
-					input [1:0]  keypress,
+					input 	     keypress_B,
+	       				input        keypress_A,
 					input        pause,
 					input [1:0]  Size,					//says what size mario is
                output logic Is_Mario             // Whether current pixel belongs to ball or background
