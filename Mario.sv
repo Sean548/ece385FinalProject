@@ -18,7 +18,7 @@ module  Mario ( input         Clk,                // 50 MHz clock
                              Reset,              // Active-high reset signal
                              frame_clk,          // The clock indicating a new frame (~60Hz)
                input [9:0]   DrawX, DrawY,       // Current pixel coordinates
-	       input [1:0]   keymove,            // right x01, left x02, down x03 , up x04
+	       input [2:0]   keymove,            // right x01, left x02, down x03 , up x04
 	       input	     keypress_B,         // Run (allows for hold. high is 1, low is 0)
 	       input         keypress_A,	 // Jump (resets after every press aka no hold)
 	       input         pause,              // Pauses all elements. high is one.
