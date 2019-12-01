@@ -22,8 +22,8 @@ module  Mario ( input         Clk,                // 50 MHz clock
 	       input	      keypress_B,         // Run (allows for hold. high is 1, low is 0)
 	       input         keypress_A,	        // Jump (resets after every press aka no hold)
 	       input         pause,              // Pauses all elements. high is one.
-	       input [1:0]  Size,		 //says what size mario is
-               output logic Is_Mario             // Whether current pixel belongs to ball or background
+	       input         Size,		 //says what size mario is
+          output Is_Mario             // Whether current pixel belongs to ball or background
               );
     
     parameter [9:0] Ball_X_Center = 10'd32;  // Center position on the X axis
@@ -189,12 +189,12 @@ module  Mario ( input         Clk,                // 50 MHz clock
     // Compute whether the pixel corresponds to ball or background
     /* Since the multiplicants are required to be signed, we have to first cast them
        from logic to int (signed by default) before they are multiplied. */
-    int DistX, DistY, Size;
+    int DistX, DistY, SizeB;
     assign DistX = DrawX - Ball_X_Pos;
     assign DistY = DrawY - Ball_Y_Pos;
-    assign Size = Ball_Size;
+    assign SizeB = Ball_Size;
     always_comb begin
-        if ( ( DistX*DistX + DistY*DistY) <= (Size*Size) ) 
+        if ( ( DistX*DistX + DistY*DistY) <= (SizeB*SizeB) ) 
             is_ball = 1'b1;
         else
             is_ball = 1'b0;
