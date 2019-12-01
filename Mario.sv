@@ -27,7 +27,7 @@ module  Mario ( input         Clk,                // 50 MHz clock
               );
     
     parameter [9:0] Ball_X_Center = 10'd32;  // Center position on the X axis
-    parameter [9:0] Ball_Y_Center = 10'd591  // Center position on the Y axis
+    parameter [9:0] Ball_Y_Center = 10'd591;  // Center position on the Y axis
     parameter [9:0] Ball_X_Min = 10'd0;       // Leftmost point on the X axis
     parameter [9:0] Ball_X_Max = 10'd639;     // Rightmost point on the X axis
     parameter [9:0] Ball_Y_Min = 10'd0;       // Topmost point on the Y axis
