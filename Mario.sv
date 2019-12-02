@@ -1,3 +1,4 @@
+ 
 //-------------------------------------------------------------------------
 //    Ball.sv                                                            --
 //    Viral Mehta                                                        --
@@ -35,7 +36,7 @@ module  Mario ( input         Clk,                // 50 MHz clock
     parameter [9:0] Ball_X_Step = 10'd1;      // Step size on the X axis
     parameter [9:0] Ball_Y_Step = 10'd20;      // Step size on the Y axis
     parameter [9:0] Ball_Size = 10'd32;        // Ball size
-	 parameter [9:0] Ball_Y_Max = 10'd575;
+	 parameter [9:0] Ball_Y_Floor = 10'd575;
 	 
 	 //need to update ball size for different marios
     
@@ -92,12 +93,12 @@ module  Mario ( input         Clk,                // 50 MHz clock
 				if(keymove==3'b000)
 					Ball_X_Motion_in=0;
 				if(keymove==3'b001)
-				
 				begin
 					if(keypress_B==1'b0)
 						Ball_X_Motion_in=Ball_X_Step;
 					if(keypress_B==1'b1)
 						Ball_X_Motion_in=Ball_X_Step+1'b1;
+				end
 				if(keymove==3'b010)
 				begin
 					if(keypress_B==1'b0)
@@ -114,11 +115,11 @@ module  Mario ( input         Clk,                // 50 MHz clock
 				
 				if(keypress_A==1'b1&&Ball_Y_Motion==0)
 				begin
-					if(Ball_Y_Pos + Ball_Y_Size >= Ball_Y_Center)
+					if(Ball_Y_Pos + Size >= Ball_Y_Center)
 						Ball_Y_Motion_in=~(Ball_Y_Step)+1'b1;
 				end
-				else if((Ball_Y_Pos + Ball_Y_Motion_+Ball_Size) > Ball_Y_Max)
-					Ball_Y_Pos_in = Ball_Y_Max-Ball_Size;
+				else if((Ball_Y_Pos + Ball_Y_Motion+Ball_Size) > Ball_Y_Floor)
+					Ball_Y_Pos_in = Ball_Y_Floor-Ball_Size;
 				else
 					Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
 				
@@ -172,18 +173,6 @@ module  Mario ( input         Clk,                // 50 MHz clock
             Ball_X_Pos_in = Ball_X_Pos + Ball_X_Motion;
             Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
         end
-        
-        /**************************************************************************************
-            ATTENTION! Please answer the following quesiton in your lab report! Points will be allocated for the answers!
-            Hidden Question #2/2:
-               Notice that Ball_Y_Pos is updated using Ball_Y_Motion. 
-              Will the new value of Ball_Y_Motion be used when Ball_Y_Pos is updated, or the old? 
-              What is the difference between writing
-                "Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;" and 
-                "Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion_in;"?
-              How will this impact behavior of the ball during a bounce, and how might that interact with a response to a keypress?
-              Give an answer in your Post-Lab.
-        **************************************************************************************/
     end
     
     // Compute whether the pixel corresponds to ball or background
@@ -195,12 +184,11 @@ module  Mario ( input         Clk,                // 50 MHz clock
     assign SizeB = Ball_Size;
     always_comb begin
         if ( ( DistX*DistX + DistY*DistY) <= (SizeB*SizeB) ) 
-            is_ball = 1'b1;
+            Is_Mario = 1'b1;
         else
-            is_ball = 1'b0;
+            Is_Mario = 1'b0;
         /* The ball's (pixelated) circle is generated using the standard circle formula.  Note that while 
            the single line is quite powerful descriptively, it causes the synthesis tool to use up three
            of the 12 available multipliers on the chip! */
     end
-    
-endmodule
+endmodule 
