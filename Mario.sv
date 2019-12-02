@@ -1,4 +1,3 @@
- 
 //-------------------------------------------------------------------------
 //    Ball.sv                                                            --
 //    Viral Mehta                                                        --
@@ -28,15 +27,14 @@ module  Mario ( input         Clk,                // 50 MHz clock
               );
     
     parameter [9:0] Ball_X_Center = 10'd32;  // Center position on the X axis
-    parameter [9:0] Ball_Y_Center = 10'd591;  // Center position on the Y axis
+    parameter [9:0] Ball_Y_Center = 10'd575;  // Center position on the Y axis
     parameter [9:0] Ball_X_Min = 10'd0;       // Leftmost point on the X axis
     parameter [9:0] Ball_X_Max = 10'd639;     // Rightmost point on the X axis
     parameter [9:0] Ball_Y_Min = 10'd0;       // Topmost point on the Y axis
     parameter [9:0] Ball_Y_Max = 10'd479;     // Bottommost point on the Y axis
-    parameter [9:0] Ball_X_Step = 10'd1;      // Step size on the X axis
+    parameter [9:0] Ball_X_Step = 10'd5;      // Step size on the X axis
     parameter [9:0] Ball_Y_Step = 10'd20;      // Step size on the Y axis
     parameter [9:0] Ball_Size = 10'd32;        // Ball size
-	 parameter [9:0] Ball_Y_Floor = 10'd575;
 	 
 	 //need to update ball size for different marios
     
@@ -107,22 +105,26 @@ module  Mario ( input         Clk,                // 50 MHz clock
 						Ball_X_Motion_in=~(Ball_X_Step);
 				end
 					
-				
-				
 				//jump with acceleration
-				Ball_Y_Motion_in = Ball_Y_Motion + 1;
-				
 				
 				if(keypress_A==1'b1&&Ball_Y_Motion==0)
 				begin
 					if(Ball_Y_Pos + Size >= Ball_Y_Center)
+					begin
+						Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
 						Ball_Y_Motion_in=~(Ball_Y_Step)+1'b1;
+					end
 				end
-				else if((Ball_Y_Pos + Ball_Y_Motion+Ball_Size) > Ball_Y_Floor)
-					Ball_Y_Pos_in = Ball_Y_Floor-Ball_Size;
+				else if((Ball_Y_Pos + Ball_Y_Motion+Ball_Size) > Ball_Y_Center)\
+				begin
+					Ball_Y_Pos_in = Ball_Y_Center-Ball_Size;
+					Ball_Y_Motion_in = 0;
+				end
 				else
+				begin
 					Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
-				
+					Ball_Y_Motion_in = Ball_Y_Motion + 1;
+				end
 				
 
 //				
@@ -171,7 +173,7 @@ module  Mario ( input         Clk,                // 50 MHz clock
         
             // Update the ball's position with its motion
             Ball_X_Pos_in = Ball_X_Pos + Ball_X_Motion;
-            Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
+//            Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
         end
     end
     
