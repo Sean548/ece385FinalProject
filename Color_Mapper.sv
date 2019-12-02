@@ -32,7 +32,6 @@ module  color_mapper ( input              Is_Mario,            // Whether curren
     begin
         if (Is_Mario == 1'b1) 
         begin
-            // White ball
             Red = 8'hff;
             Green = 8'hff;
             Blue = 8'hff;
