@@ -1,0 +1,119 @@
+module bigBushTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'h0ff0e4;
+	2'b01: out <= 24'h000444;
+	2'b10: out <= 24'h0a4bc0;
+	2'b11: out <= 24'h1c8414;
+	endcase
+endmodule
+
+module bigCloudTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'h0ff0e4;
+	2'b01: out <= 24'h000444;
+	2'b10: out <= 24'hffffff;
+	2'b11: out <= 24'h0094ff;
+	endcase
+endmodule
+
+module bigHillTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'h0ff0e4;
+	2'b01: out <= 24'h000444;
+	2'b10: out <= 24'h1c8414;
+	endcase
+endmodule
+
+module blockBreakTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'h0ff0e4;
+	2'b01: out <= 24'hffcec6;
+	2'b10: out <= 24'h000000;
+	2'b11: out <= 24'h09c4a0;
+	endcase
+endmodule
+
+module blockHiddenTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'h0ff0e4;
+	2'b01: out <= 24'hffcec6;
+	2'b10: out <= 24'h000000;
+	2'b11: out <= 24'h09c4a0;
+	endcase
+endmodule
+
+module blueCoinsTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	3'b000: out <= 24'h0ff0e4;
+	3'b001: out <= 24'he69c21;
+	3'b010: out <= 24'h007b8c;
+	3'b011: out <= 24'h09c4a0;
+	3'b100: out <= 24'b052210;
+	endcase
+endmodule
+
+module floorBlockTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'hffcec6;
+	2'b01: out <= 24'h000000;
+	2'b10: out <= 24'h09c4a0;
+	endcase
+endmodule
+
+module MarioTable (
+	input logic clk,
+	input logic [1:0] in,
+	input logic [24:0] out
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: out <= 24'h0ff0e4;
+	2'b01: out <= 24'hb13425;
+	2'b10: out <= 24'h06a6b4;
+	2'b11: out <= 24'he39d25;
+	endcase
+endmodule
+
