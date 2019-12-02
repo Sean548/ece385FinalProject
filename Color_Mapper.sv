@@ -39,9 +39,9 @@ module  color_mapper ( input              Is_Mario,            // Whether curren
         else 
         begin
             // Background with nice color gradient
-            Red = 8'h3f; 
-            Green = 8'h00;
-            Blue = 8'h7f - {1'b0, DrawX[9:3]};
+            Red = 8'h01; 
+            Green = 8'hff;
+            Blue = 8'hff;
         end
     end 
     
