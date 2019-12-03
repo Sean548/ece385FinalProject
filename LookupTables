@@ -228,6 +228,216 @@ endmodule
 
 //////////////////////////////////////
 
+module castleTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hc4;
+			 VGA_B <=8'hb4;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0d;
+			 VGA_G <=8'h44;
+			 VGA_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module coinTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'h83;
+			 VGA_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha0;
+			 VGA_B <=8'h44;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module fireFlowerTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	4'b0000: begin
+			  VGA_R <=8'h0f;
+			  VGA_G <=8'hf0;
+			  VGA_B <=8'he4;
+			  end
+			  
+	4'b0001: begin
+			  VGA_R <=8'hff;
+			  VGA_G <=8'hff;
+			  VGA_B <=8'hff;
+			  end
+			  
+	4'b0010: begin
+			  VGA_R <=8'hf0;
+			  VGA_G <=8'hd0;
+			  VGA_B <=8'hb0;
+			  end
+			  
+	4'b0011: begin
+			  VGA_R <=8'hff;
+			  VGA_G <=8'ha0;
+			  VGA_B <=8'h44;
+			  end
+			  
+	4'b0100: begin
+			  VGA_R <=8'he4;
+			  VGA_G <=8'h5c;
+			  VGA_B <=8'h10;
+			  end
+			  
+	4'b0101: begin
+			  VGA_R <=8'h0a;
+			  VGA_G <=8'hc7;
+			  VGA_B <=8'hc0;
+			  end
+			  
+	4'b0110: begin
+			  VGA_R <=8'h0f;
+			  VGA_G <=8'h83;
+			  VGA_B <=8'h80;
+			  end
+			  
+	4'b0111: begin
+			  VGA_R <=8'h00;
+			  VGA_G <=8'h00;
+			  VGA_B <=8'h80;
+			  end
+			  
+	4'b1000: begin
+			  VGA_R <=8'h00;
+			  VGA_G <=8'h0a;
+			  VGA_B <=8'h80;
+			  end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module fireballTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'h83;
+			 VGA_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha0;
+			 VGA_B <=8'h44;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module flagpoleTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0a;
+			 VGA_G <=8'h4b;
+			 VGA_B <=8'hc0;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h1c;
+			 VGA_G <=8'h84;
+			 VGA_B <=8'h14;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
 module floorBlockTable (
 	input logic clk,
 	input logic [1:0] in,
@@ -252,6 +462,78 @@ always_ff @ (negedge clk)
 			 VGA_R <=8'h09;
 			 VGA_G <=8'hc4;
 			 VGA_B <=8'ha0;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module gombaTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'he4;
+			 VGA_G <=8'h58;
+			 VGA_B <=8'h10;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h20;
+			 VGA_G <=8'h20;
+			 VGA_B <=8'h20;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'hf4;
+			 VGA_G <=8'hd4;
+			 VGA_B <=8'hb4;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module koopaTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha0;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h0a;
+			 VGA_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
 			 end
 	endcase
 endmodule
@@ -288,6 +570,318 @@ always_ff @ (negedge clk)
 			 VGA_R <=8'he3;
 			 VGA_G <=8'h9d;
 			 VGA_B <=8'h25;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module mushroomTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha0;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'h83;
+			 VGA_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module mysteryBlockTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	3'b000: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h00;
+			 VGA_B <=8'h00;
+			 end
+			 
+	3'b001: begin
+			 VGA_R <=8'he7;
+			 VGA_G <=8'h5a;
+			 VGA_B <=8'h10;
+			 end
+			 
+	3'b010: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	3'b011: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha5;
+			 VGA_B <=8'h42;
+			 end
+			 
+	3'b100: begin
+			 VGA_R <=8'h08;
+			 VGA_G <=8'hc1;
+			 VGA_B <=8'h00;
+			 end
+			 
+	3'b101: begin
+			 VGA_R <=8'h09;
+			 VGA_G <=8'hc4;
+			 VGA_B <=8'ha0;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module oneUpMushroomTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha0;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h0a;
+			 VGA_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module pipeTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0a;
+			 VGA_G <=8'h4b;
+			 VGA_B <=8'hc0;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h1c;
+			 VGA_G <=8'h84;
+			 VGA_B <=8'h14;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module smallBushTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0a;
+			 VGA_G <=8'h4b;
+			 VGA_B <=8'hc0;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h1c;
+			 VGA_G <=8'h84;
+			 VGA_B <=8'h14;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module smallCloudTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h94;
+			 VGA_B <=8'hff;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module smallHillTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h1c;
+			 VGA_G <=8'h84;
+			 VGA_B <=8'h14;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module smallBushTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	3'b000: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	3'b001: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'ha0;
+			 VGA_B <=8'h44;
+			 end
+			 
+	3'b010: begin
+			 VGA_R <=8'he4;
+			 VGA_G <=8'h5c;
+			 VGA_B <=8'h10;
+			 end
+			 
+	3'b011: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'h83;
+			 VGA_B <=8'h80;
+			 end
+	
+	3'b100: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h0a;
+			 VGA_B <=8'h80;
+			 end
+			 
+	3'b101: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h00;
+			 VGA_B <=8'h80;
+			 end
+			 
+	3'b110: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'he0;
+			 VGA_B <=8'ha8;
 			 end
 	endcase
 endmodule
