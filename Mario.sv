@@ -14,183 +14,188 @@
 //-------------------------------------------------------------------------
 
 
-module  Mario ( input         Clk,                // 50 MHz clock
-                             Reset,              // Active-high reset signal
-									  frame_clk,          // The clock indicating a new frame (~60Hz)
-          input [9:0]   DrawX, DrawY,       // Current pixel coordinates
-	       input [1:0]   keymove,            // right x01, left x02, down x03
-	       input	      keypress_B,         // Run (allows for hold. high is 1, low is 0)
-	       input         keypress_A,	        // Jump (resets after every press aka no hold)
-	       input         pause,              // Pauses all elements. high is one.
-	       input         Size,		 //says what size mario is
-          output Is_Mario             // Whether current pixel belongs to ball or background
+module  Mario (input         Clk,                 // 50 MHz clock
+                             Reset,               // Active-high reset signal
+									  frame_clk,           // The clock indicating a new frame (~60Hz)
+					input [9:0]   DrawX, DrawY,        // Current pixel coordinates
+					input [1:0]   keymove,             // right x01, left x02, down x03
+					input	        keypress_B,          // Run (allows for hold. high is 1, low is 0)
+					input         keypress_A,	        // Jump (resets after every press aka no hold)
+					input         pause,               // Pauses all elements. high is one.
+					input         Size,		 			  // says what size mario is
+					output 		  Is_Mario             // Whether current pixel belongs to ball or background
               );
     
-    parameter [9:0] Ball_X_Center = 10'd32;  // Center position on the X axis
-    parameter [9:0] Ball_Y_Center = 10'd575;  // Center position on the Y axis
-    parameter [9:0] Ball_X_Min = 10'd0;       // Leftmost point on the X axis
-    parameter [9:0] Ball_X_Max = 10'd639;     // Rightmost point on the X axis
-    parameter [9:0] Ball_Y_Min = 10'd0;       // Topmost point on the Y axis
-    parameter [9:0] Ball_Y_Max = 10'd479;     // Bottommost point on the Y axis
-    parameter [9:0] Ball_X_Step = 10'd5;      // Step size on the X axis
-    parameter [9:0] Ball_Y_Step = 10'd20;      // Step size on the Y axis
-    parameter [9:0] Ball_Size = 10'd32;        // Ball size
+    parameter [9:0] Mario_X_Start = 10'd32;      // Center position on the X axis
+    parameter [9:0] Mario_Y_Start = 10'd384;     // Center position on the Y axis //if it doesnt show change this to 100 
+    parameter [9:0] Mario_X_Min = 10'd0;          // Leftmost point on the X axis
+    parameter [9:0] Mario_X_Max = 10'd640;     	  // Rightmost point on the X axis
+    parameter [9:0] Mario_Y_Min = 10'd0;       	  // Topmost point on the Y axis
+    parameter [9:0] Mario_Y_Max = 10'd416;     	  // Bottommost point on the Y axis
+    parameter [9:0] Mario_X_Step = 10'd5;      	  // Step size on the X axis
+    parameter [9:0] Mario_Y_Step = 10'd20;        // Step size on the Y axis
+    parameter [9:0] Mario_Size = 10'd32;          // Ball size
 	 
-	 //need to update ball size for different marios
-    
-    logic [9:0] Ball_X_Pos, Ball_X_Motion, Ball_Y_Pos, Ball_Y_Motion;
-    logic [9:0] Ball_X_Pos_in, Ball_X_Motion_in, Ball_Y_Pos_in, Ball_Y_Motion_in;
-//    int check = 0;
+//	 parameter [9:0] Small_Mario_Shape_X = 10'd32;
+//	 parameter [9:0] Small_Mario_Shape_Y = 10'd32;
+//	 parameter [9:0] Small_Mario_Shape_Size_X = 10'd32;
+//	 parameter [9:0] Small_Mario_Shape_Size_Y = 10'd32;
+//	 
+//	 parameter [9:0] Big_Mario_Shape_X = 10'd32;
+//	 parameter [9:0] Big_Mario_Shape_Y = 10'd32;
+//	 parameter [9:0] Big_Mario_Shape_Size_X = 10'd32;
+//	 parameter [9:0] Big_Mario_Shape_Size_Y = 10'd64;
+	 
+	 
+    logic [9:0] Mario_X_Pos,
+					 Mario_X_Motion,
+					 Mario_Y_Pos,
+					 Mario_Y_Motion;
+					 
+    logic [9:0] Mario_X_Pos_in,
+					 Mario_X_Motion_in,
+					 Mario_Y_Pos_in,
+					 Mario_Y_Motion_in;
+					 
+	 logic [9:0] Ground_Height = 416;
+					 
+//	 logic [9:0] Mario_Shape_X = 300;
+//	 logic [9:0] Mario_Shape_Y = 300;
+	 logic [9:0] Mario_Size_X  = 32;
+	 logic [9:0] Mario_Size_Y  = 32;
+					 
+	 
     //////// Do not modify the always_ff blocks. ////////
-    // Detect rising edge of frame_clk
+	 
     logic frame_clk_delayed, frame_clk_rising_edge;
     always_ff @ (posedge Clk) begin
         frame_clk_delayed <= frame_clk;
         frame_clk_rising_edge <= (frame_clk == 1'b1) && (frame_clk_delayed == 1'b0);
     end
-    // Update registers
+	 
+    /////////////////////////////////////////////////////
+	 
+	 
+	 
+	 
+	 //////// Update Registers -- DO NOT MODIFY //////////
+	 
     always_ff @ (posedge Clk)
     begin
         if (Reset)
         begin
-            Ball_X_Pos <= Ball_X_Center;
-            Ball_Y_Pos <= Ball_Y_Center;
-            Ball_X_Motion <= 10'd0;
-            Ball_Y_Motion <= 10'd0;
+            Mario_X_Pos <= Mario_X_Start;
+            Mario_Y_Pos <= Mario_Y_Start;
+            Mario_X_Motion <= 10'd0;
+            Mario_Y_Motion <= 10'd0;
         end
         else
         begin
-            Ball_X_Pos <= Ball_X_Pos_in;
-            Ball_Y_Pos <= Ball_Y_Pos_in;
-            Ball_X_Motion <= Ball_X_Motion_in;
-            Ball_Y_Motion <= Ball_Y_Motion_in;
+            Mario_X_Pos <= Mario_X_Pos_in;
+            Mario_Y_Pos <= Mario_Y_Pos_in;
+            Mario_X_Motion <= Mario_X_Motion_in;
+            Mario_Y_Motion <= Mario_Y_Motion_in;
         end
     end
-    //////// Do not modify the always_ff blocks. ////////
+	 
+    /////////////////////////////////////////////////////
     
-    // You need to modify always_comb block.
+	 
+	 
+	 
+	 /////////////////////////////////////////////////////
+	 //left and right movement with sprint but no acceleration yet
+	 
     always_comb
     begin
-        // By default, keep motion and position unchanged
-        Ball_X_Pos_in = Ball_X_Pos;
-        Ball_Y_Pos_in = Ball_Y_Pos;
-        Ball_X_Motion_in = Ball_X_Motion;
-        Ball_Y_Motion_in = Ball_Y_Motion +1'b1;
+        // Default Position for Mario
+        Mario_X_Pos_in = Mario_X_Pos;
+        Mario_Y_Pos_in = Mario_Y_Pos;
+        Mario_X_Motion_in = Mario_X_Motion;
+        Mario_Y_Motion_in = Mario_Y_Motion; //+ 1'b1;
         
-        // Update position and motion only at rising edge of frame clock
         if (frame_clk_rising_edge)
         begin
-            // Be careful when using comparators with "logic" datatype because compiler treats 
-            //   both sides of the operator as UNSIGNED numbers.
-            // e.g. Ball_Y_Pos - Ball_Size <= Ball_Y_Min 
-            // If Ball_Y_Pos is 0, then Ball_Y_Pos - Ball_Size will not be -4, but rather a large positive number.
-				//check = check;
-				
-				
-				//left and right movement with sprint but no acceleration yet
-				if(keymove==3'b000)
-					Ball_X_Motion_in=0;
-				if(keymove==3'b001)
+		  ////////////////////////////////////////////////////////////////
+				if(keymove == 3'b000)
+					Mario_X_Motion_in= 0; //If No buttons pressed, No Movement
+		  ////////////////////////////////////////////////////////////////	
+				if(keymove == 3'b001)
 				begin
-					if(keypress_B==1'b0)
-						Ball_X_Motion_in=Ball_X_Step;
-					if(keypress_B==1'b1)
-						Ball_X_Motion_in=Ball_X_Step+1'b1;
+					if(keypress_B == 1'b0)
+						Mario_X_Motion_in = Mario_X_Step;
+					if(keypress_B == 1'b1)
+						Mario_X_Motion_in = Mario_X_Step + 1'b1;
 				end
-				if(keymove==3'b010)
+		  ////////////////////////////////////////////////////////////////
+				if(keymove == 3'b010)
 				begin
-					if(keypress_B==1'b0)
-						Ball_X_Motion_in=~(Ball_X_Step)+ 1'b1;
-					if(keypress_B==1'b1)
-						Ball_X_Motion_in=~(Ball_X_Step);
+					if(keypress_B == 1'b0)
+						Mario_X_Motion_in =~(Mario_X_Step) + 1'b1;
+					if(keypress_B == 1'b1)
+						Mario_X_Motion_in =~(Mario_X_Step);
 				end
-					
-				//jump with acceleration
-				
-				if(keypress_A==1'b1&&Ball_Y_Motion==0)
+		  ////////////////////////////////////////////////////////////////		
+		  //jump with acceleration
+				if(keypress_A == 1'b1 && (Mario_Y_Pos >= Ground_Height + Mario_Size))
 				begin
-					if(Ball_Y_Pos + Size >= Ball_Y_Center)
+					if((Mario_Y_Pos + Mario_Size) >= Ground_Height)
 					begin
-						Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
-						Ball_Y_Motion_in=~(Ball_Y_Step)+1'b1;
+						Mario_Y_Pos_in = Mario_Y_Pos + Mario_Y_Motion;
+						Mario_Y_Motion_in =~(Mario_Y_Step) + 1'b1;
 					end
 				end
-				else if((Ball_Y_Pos + Ball_Y_Motion+Ball_Size) > Ball_Y_Center)\
-				begin
-					Ball_Y_Pos_in = Ball_Y_Center-Ball_Size;
-					Ball_Y_Motion_in = 0;
-				end
+		  ////////////////////////////////////////////////////////////////
+//				else if((Mario_Y_Pos + Mario_Y_Motion + Mario_Size) > Ground_Height)
+//				begin
+//					Mario_Y_Pos_in = Mario_Y_Start - Mario_Size;
+//					Mario_Y_Motion_in = 0;
+//				end
+// 			else
+				else if((Mario_Y_Pos - Mario_Size) == Mario_X_Max)
+					Mario_X_Motion_in = 0;
+				
+				else if(((Mario_X_Pos - Mario_Size) || (Ground_Height - Mario_Size) || (Mario_Y_Pos + Mario_Y_Motion + Mario_Size)) > Ground_Height)
+					Mario_Y_Pos_in = (Ground_Height - Mario_Size);
 				else
 				begin
-					Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
-					Ball_Y_Motion_in = Ball_Y_Motion + 1;
+					Mario_Y_Pos_in = Mario_Y_Pos + Mario_Y_Motion;
+					Mario_Y_Motion_in = Mario_Y_Motion + 1'b1;
 				end
-				
+		  ////////////////////////////////////////////////////////////////
 
-//				
-//				if(keycode == 8'h1a) //check for up
-//				begin
-//					Ball_Y_Motion_in = ~(Ball_Y_Step)+ 1'b1;
-//					Ball_X_Motion_in= 0;
-//				end
-//				else if(keycode == 8'h16) //check for down
-//				begin
-//					Ball_Y_Motion_in = (Ball_Y_Step);
-//					Ball_X_Motion_in= 0;
-//				end
-//				else if(keycode == 8'h4) //check for left
-//				begin
-//					Ball_Y_Motion_in = 0;
-//					Ball_X_Motion_in= ~(Ball_X_Step)+ 1'b1;
-//				end
-//				else if(keycode == 8'h7) //check for right
-//				begin
-//					Ball_Y_Motion_in = 0;
-//					Ball_X_Motion_in= Ball_X_Step;
-//				end
-//            if( Ball_Y_Pos + Ball_Size >= Ball_Y_Max )  // Ball is at the bottom edge, BOUNCE!
-//				begin
-//                Ball_Y_Motion_in = (~(Ball_Y_Step) + 1'b1);  // 2's complement.  
-//					 Ball_X_Motion_in = 0;
-//				end
-//            else if ( Ball_Y_Pos <= Ball_Y_Min + Ball_Size )  // Ball is at the top edge, BOUNCE!
-//				begin
-//                Ball_Y_Motion_in = Ball_Y_Step;
-//					 Ball_X_Motion_in = 0;
-//				end
-//				else if( Ball_X_Pos + Ball_Size >= Ball_X_Max )  // Ball is at the right edge, BOUNCE!
-//				begin
-//                Ball_X_Motion_in = (~(Ball_X_Step) + 1'b1);  // 2's complement.  
-//					 Ball_Y_Motion_in = 0;
-//				end
-//				else if ( Ball_X_Pos <= Ball_X_Min + Ball_Size )  // Ball is at the left edge, BOUNCE!
-//				begin
-//                Ball_X_Motion_in = Ball_X_Step;
-//					 Ball_Y_Motion_in = 0;
-//				end
-//            // TODO: Add other boundary detections and handle keypress here.
-//        
+
+            if( Mario_Y_Pos + Mario_Size >= Ground_Height )  // Ball is at the bottom edge, BOUNCE!
+				begin
+                Mario_Y_Motion_in = (~(Mario_Y_Step) + 1'b1);  // 2's complement.  
+				end
+            if ( Mario_Y_Pos <= Mario_Y_Min + Mario_Size )  // Ball is at the top edge, BOUNCE!
+				begin
+                Mario_Y_Motion_in = Mario_Y_Step;
+				end
+				if( Mario_X_Pos + Mario_Size >= 10'd320 )  // Ball is at the right edge, BOUNCE!
+				begin
+                Mario_X_Motion_in = (~(Mario_X_Step) + 1'b1);  // 2's complement.  
+				end
+				else if ( Mario_X_Pos <= Mario_X_Min + 10'd16 )  // Ball is at the left edge, BOUNCE!
+				begin
+                Mario_X_Motion_in = Mario_X_Step;
+				end
         
+		  
             // Update the ball's position with its motion
-            Ball_X_Pos_in = Ball_X_Pos + Ball_X_Motion;
-//            Ball_Y_Pos_in = Ball_Y_Pos + Ball_Y_Motion;
+            Mario_X_Pos_in = Mario_X_Pos + Mario_X_Motion;
+            //Mario_Y_Pos_in = Mario_Y_Pos + Mario_Y_Motion;
         end
     end
     
-    // Compute whether the pixel corresponds to ball or background
-    /* Since the multiplicants are required to be signed, we have to first cast them
-       from logic to int (signed by default) before they are multiplied. */
-    int DistX, DistY, SizeB;
-    assign DistX = DrawX - Ball_X_Pos;
-    assign DistY = DrawY - Ball_Y_Pos;
-    assign SizeB = Ball_Size;
-    always_comb begin
-        if ( ( DistX*DistX + DistY*DistY) <= (SizeB*SizeB) ) 
+    // Compute whether the pixel corresponds to Mario or background
+    always_comb
+	 begin
+		  if ( DrawX >= Mario_X_Pos && DrawX < Mario_X_Pos + Mario_Size_X &&
+				 DrawY >= Mario_Y_Pos && DrawY < Mario_Y_Pos + Mario_Size_Y)
             Is_Mario = 1'b1;
         else
             Is_Mario = 1'b0;
-        /* The ball's (pixelated) circle is generated using the standard circle formula.  Note that while 
-           the single line is quite powerful descriptively, it causes the synthesis tool to use up three
-           of the 12 available multipliers on the chip! */
     end
 endmodule 
