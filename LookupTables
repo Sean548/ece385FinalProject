@@ -1,119 +1,293 @@
+///////////////////////////////////////////////////////////////
+//																				 //
+//							 Super  Gene  Bro								 //
+//						      Lookup Tables								 //
+//								-------------								 //
+//			    	By: Sean McGee & Peter Hevrdejs					 //
+//						Created: December 1st 2019						 //
+//																				 //
+///////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////
+
 module bigBushTable (
-	input logic clk,
-	input logic [1:0] in,
-	input logic [24:0] out
+	input  logic clk,
+	input  logic [1:0] in,
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'h0ff0e4;
-	2'b01: out <= 24'h000444;
-	2'b10: out <= 24'h0a4bc0;
-	2'b11: out <= 24'h1c8414;
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h0a;
+			 VGA_G <=8'h4b;
+			 VGA_B <=8'hc0;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h1c;
+			 VGA_G <=8'h84;
+			 VGA_B <=8'h14;
+			 end
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module bigCloudTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'h0ff0e4;
-	2'b01: out <= 24'h000444;
-	2'b10: out <= 24'hffffff;
-	2'b11: out <= 24'h0094ff;
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hff;
+			 VGA_B <=8'hff;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h94;
+			 VGA_B <=8'hff;
+			 end
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module bigHillTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'h0ff0e4;
-	2'b01: out <= 24'h000444;
-	2'b10: out <= 24'h1c8414;
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h04;
+			 VGA_B <=8'h04;
+			 end
+			 
+	2'b10: begin
+		    VGA_R <=8'h1c;
+			 VGA_G <=8'h84;
+			 VGA_B <=8'h14;
+			 end
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module blockBreakTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'h0ff0e4;
-	2'b01: out <= 24'hffcec6;
-	2'b10: out <= 24'h000000;
-	2'b11: out <= 24'h09c4a0;
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hce;
+			 VGA_B <=8'hc6;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h00;
+			 VGA_B <=8'h00;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h09;
+			 VGA_G <=8'hc4;
+			 VGA_B <=8'ha0;
+			 end
+			 
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module blockHiddenTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'h0ff0e4;
-	2'b01: out <= 24'hffcec6;
-	2'b10: out <= 24'h000000;
-	2'b11: out <= 24'h09c4a0;
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hce;
+			 VGA_B <=8'hc6;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h00;
+			 VGA_B <=8'h00;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'h09;
+			 VGA_G <=8'hc4;
+			 VGA_B <=8'ha0;
+			 end
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module blueCoinsTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	3'b000: out <= 24'h0ff0e4;
-	3'b001: out <= 24'he69c21;
-	3'b010: out <= 24'h007b8c;
-	3'b011: out <= 24'h09c4a0;
-	3'b100: out <= 24'b052210;
+	3'b000: begin
+			  VGA_R <=8'h0f;
+			  VGA_G <=8'hf0;
+			  VGA_B <=8'he4;
+			  end
+			  
+	3'b001: begin
+			  VGA_R <=8'he6;
+			  VGA_G <=8'h9c;
+			  VGA_B <=8'h21;
+			  end
+			  
+	3'b010: begin
+			  VGA_R <=8'h00;
+			  VGA_G <=8'h7b;
+			  VGA_B <=8'h8c;
+			  end
+			  
+	3'b011: begin
+			  VGA_R <=8'h09;
+			  VGA_G <=8'hc4;
+			  VGA_B <=8'ha0;
+			  end
+			  
+	3'b100: begin
+			  VGA_R <=8'h05;
+			  VGA_G <=8'h22;
+			  VGA_B <=8'h10;
+			  end
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module floorBlockTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'hffcec6;
-	2'b01: out <= 24'h000000;
-	2'b10: out <= 24'h09c4a0;
+	2'b00: begin
+			 VGA_R <=8'hff;
+			 VGA_G <=8'hce;
+			 VGA_B <=8'hc6;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'h00;
+			 VGA_G <=8'h00;
+			 VGA_B <=8'h00;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h09;
+			 VGA_G <=8'hc4;
+			 VGA_B <=8'ha0;
+			 end
 	endcase
 endmodule
+
+//////////////////////////////////////
 
 module MarioTable (
 	input logic clk,
 	input logic [1:0] in,
-	input logic [24:0] out
+	output logic [7:0] VGA_R, VGA_G, VGA_B
 );
 
 always_ff @ (negedge clk)
 	case (in)
-	2'b00: out <= 24'h0ff0e4;
-	2'b01: out <= 24'hb13425;
-	2'b10: out <= 24'h06a6b4;
-	2'b11: out <= 24'he39d25;
+	2'b00: begin
+			 VGA_R <=8'h0f;
+			 VGA_G <=8'hf0;
+			 VGA_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 VGA_R <=8'hb1;
+			 VGA_G <=8'h34;
+			 VGA_B <=8'h25;
+			 end
+			 
+	2'b10: begin
+			 VGA_R <=8'h06;
+			 VGA_G <=8'ha6;
+			 VGA_B <=8'hb4;
+			 end
+			 
+	2'b11: begin
+			 VGA_R <=8'he3;
+			 VGA_G <=8'h9d;
+			 VGA_B <=8'h25;
+			 end
 	endcase
 endmodule
-
