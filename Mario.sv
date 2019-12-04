@@ -23,6 +23,7 @@ module  Mario (input         Clk,                 // 50 MHz clock
 					input         keypress_A,	        // Jump (resets after every press aka no hold)
 					input         pause,               // Pauses all elements. high is one.
 					input         Size,		 			  // says what size mario is
+					output [9:0]  mario_distx,mario_disty,
 					output 		  Is_Mario             // Whether current pixel belongs to ball or background
               );
     
@@ -32,7 +33,7 @@ module  Mario (input         Clk,                 // 50 MHz clock
     parameter [9:0] Mario_X_Max = 10'd640;     	  // Rightmost point on the X axis
     parameter [9:0] Mario_Y_Min = 10'd0;       	  // Topmost point on the Y axis
     parameter [9:0] Mario_Y_Max = 10'd416;     	  // Bottommost point on the Y axis
-    parameter [9:0] Mario_X_Step = 10'd5;      	  // Step size on the X axis
+    parameter [9:0] Mario_X_Step = 10'd3;      	  // Step size on the X axis
     parameter [9:0] Mario_Y_Step = 10'd20;        // Step size on the Y axis
     parameter [9:0] Mario_Size = 10'd32;          // Ball size
 	 
@@ -57,7 +58,7 @@ module  Mario (input         Clk,                 // 50 MHz clock
 					 Mario_Y_Pos_in,
 					 Mario_Y_Motion_in;
 					 
-	 logic [9:0] Ground_Height = 416;
+	 logic [9:0] Ground_Height = 384;
 					 
 //	 logic [9:0] Mario_Shape_X = 300;
 //	 logic [9:0] Mario_Shape_Y = 300;
@@ -99,8 +100,8 @@ module  Mario (input         Clk,                 // 50 MHz clock
     end
 	 
     /////////////////////////////////////////////////////
-    
-	 
+	 assign mario_distx = DrawX - Mario_X_Pos;
+	 assign mario_disty = DrawY - Mario_Y_Pos;
 	 
 	 
 	 /////////////////////////////////////////////////////
@@ -125,7 +126,7 @@ module  Mario (input         Clk,                 // 50 MHz clock
 					if(keypress_B == 1'b0)
 						Mario_X_Motion_in = Mario_X_Step;
 					if(keypress_B == 1'b1)
-						Mario_X_Motion_in = Mario_X_Step + 1'b1;
+						Mario_X_Motion_in = Mario_X_Step + 1'b11;
 				end
 		  ////////////////////////////////////////////////////////////////
 				if(keymove == 3'b010)
@@ -133,7 +134,7 @@ module  Mario (input         Clk,                 // 50 MHz clock
 					if(keypress_B == 1'b0)
 						Mario_X_Motion_in =~(Mario_X_Step) + 1'b1;
 					if(keypress_B == 1'b1)
-						Mario_X_Motion_in =~(Mario_X_Step);
+						Mario_X_Motion_in =~(Mario_X_Step) - 1'b10;
 				end
 		  ////////////////////////////////////////////////////////////////		
 		  //jump with acceleration
@@ -167,7 +168,10 @@ module  Mario (input         Clk,                 // 50 MHz clock
 
             if( Mario_Y_Pos + Mario_Size >= Ground_Height )  // Ball is at the bottom edge, BOUNCE!
 				begin
-                Mario_Y_Motion_in = (~(Mario_Y_Step) + 1'b1);  // 2's complement.  
+					 if(keypress_A==1'b1)
+						Mario_Y_Motion_in = (~(Mario_Y_Step) + 1'b1);  // 2's complement.  
+					 else
+						Mario_Y_Motion_in = 0;
 				end
             if ( Mario_Y_Pos <= Mario_Y_Min + Mario_Size )  // Ball is at the top edge, BOUNCE!
 				begin
@@ -175,11 +179,17 @@ module  Mario (input         Clk,                 // 50 MHz clock
 				end
 				if( Mario_X_Pos + Mario_Size >= 10'd320 )  // Ball is at the right edge, BOUNCE!
 				begin
-                Mario_X_Motion_in = (~(Mario_X_Step) + 1'b1);  // 2's complement.  
+					 if(keymove == 3'b010)
+						Mario_X_Motion_in = (~(Mario_X_Step) + 1'b1);
+                else
+						Mario_X_Motion_in = 0;
 				end
-				else if ( Mario_X_Pos <= Mario_X_Min + 10'd16 )  // Ball is at the left edge, BOUNCE!
+				else if ( Mario_X_Pos <= Mario_X_Min + 10'd0 )  // Ball is at the left edge, BOUNCE!
 				begin
-                Mario_X_Motion_in = Mario_X_Step;
+					 if(keymove == 3'b001)
+						Mario_X_Motion_in = Mario_X_Step;
+                else
+						Mario_X_Motion_in = 0;
 				end
         
 		  
@@ -198,4 +208,6 @@ module  Mario (input         Clk,                 // 50 MHz clock
         else
             Is_Mario = 1'b0;
     end
+	 
+	 
 endmodule 
