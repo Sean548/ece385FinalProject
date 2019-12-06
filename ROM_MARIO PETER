@@ -1,0 +1,19 @@
+module ROM_SmallMario( input [9:0] READ_ADDR,
+						input Clk,
+						output logic [3:0] DATA_OUT
+					  );
+
+logic [3:0] mem [0:1023]; //logic[<Number of Bits per address - 1> : 0] mem [0 : <Number of Addresses - 1>];
+
+initial 
+begin
+	$readmemh("C:/intelFPGA_lite/18.1/Final_Project/txt_files/Small_Mario.txt",mem);
+end 
+
+always_ff @ (posedge Clk)
+begin
+	DATA_OUT <= mem[READ_ADDR];
+end 
+
+
+endmodule 
