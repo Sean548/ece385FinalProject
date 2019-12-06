@@ -1,0 +1,53 @@
+//-------------------------------------------------------------------------
+//    Color_Mapper.sv                                                    --
+//    Stephen Kempf                                                      --
+//    3-1-06                                                             --
+//                                                                       --
+//    Modified by David Kesler  07-16-2008                               --
+//    Translated by Joe Meng    07-07-2013                               --
+//    Modified by Po-Han Huang  10-06-2017                               --
+//                                                                       --
+//    Fall 2017 Distribution                                             --
+//                                                                       --
+//    For use with ECE 385 Lab 8                                         --
+//    University of Illinois ECE Department                              --
+//-------------------------------------------------------------------------
+
+// color_mapper: Decide which color to be output to VGA for each pixel.
+module  Color_Mapper ( input       Is_Mario,            // Whether current pixel belongs to ball 
+                       input 		  CLK,
+							  input [7:0] Mario_R_In,Mario_G_In,Mario_B_In,
+                       input [9:0] DrawX, DrawY,       // Current pixel coordinates
+                       output logic [7:0] VGA_R, VGA_G, VGA_B // VGA RGB output
+                     );
+    logic [7:0] Red, Green, Blue;
+	 int SizeX;
+//	 assign SizeX = 640;
+    
+    // Output colors to VGA
+    assign VGA_R = Red;
+    assign VGA_G = Green;
+    assign VGA_B = Blue;
+  
+
+    // Assign color based on Is_Mario signal
+    always_comb
+    begin
+		  Red = 8'h04; 
+        Green = 8'h9c;
+        Blue = 8'hab;
+		  
+        if(Is_Mario == 1'b1) 
+			begin
+				if((Mario_R_In!=8'hf0) && (Mario_G_In != 8'h0f) && (Mario_B_In != 8'he4) )
+					begin
+					Red = Mario_R_In;
+					Green = Mario_G_In;
+					Blue = Mario_B_In;
+					end
+			end
+            // Background with nice color gradient
+    end 
+
+	 
+endmodule
