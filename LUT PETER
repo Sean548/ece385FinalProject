@@ -1,0 +1,648 @@
+///////////////////////////////////////////////////////////////
+//																				 //
+//							 Super  Gene  Bro								 //
+//						      Lookup Tables								 //
+//								-------------								 //
+//			    	By: Sean McGee & Peter Hevrdejs					 //
+//						Created: December 1st 2019						 //
+//																				 //
+///////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////
+//////////////////////////////////////
+
+module blockHiddenTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'hce;
+			 LUT_B <=8'hc6;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h00;
+			 LUT_B <=8'h00;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'h09;
+			 LUT_G <=8'hc4;
+			 LUT_B <=8'ha0;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module blueCoinsTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	3'b000: begin
+			  LUT_R <=8'h0f;
+			  LUT_G <=8'hf0;
+			  LUT_B <=8'he4;
+			  end
+			  
+	3'b001: begin
+			  LUT_R <=8'he6;
+			  LUT_G <=8'h9c;
+			  LUT_B <=8'h21;
+			  end
+			  
+	3'b010: begin
+			  LUT_R <=8'h00;
+			  LUT_G <=8'h7b;
+			  LUT_B <=8'h8c;
+			  end
+			  
+	3'b011: begin
+			  LUT_R <=8'h09;
+			  LUT_G <=8'hc4;
+			  LUT_B <=8'ha0;
+			  end
+			  
+	3'b100: begin
+			  LUT_R <=8'h05;
+			  LUT_G <=8'h22;
+			  LUT_B <=8'h10;
+			  end
+	endcase
+endmodule
+
+//////////////////////////////////////
+//////////////////////////////////////
+
+module coinTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'hff;
+			 LUT_B <=8'hff;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'h83;
+			 LUT_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'ha0;
+			 LUT_B <=8'h44;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module fireFlowerTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	4'b0000: begin
+			  LUT_R <=8'h0f;
+			  LUT_G <=8'hf0;
+			  LUT_B <=8'he4;
+			  end
+			  
+	4'b0001: begin
+			  LUT_R <=8'hff;
+			  LUT_G <=8'hff;
+			  LUT_B <=8'hff;
+			  end
+			  
+	4'b0010: begin
+			  LUT_R <=8'hf0;
+			  LUT_G <=8'hd0;
+			  LUT_B <=8'hb0;
+			  end
+			  
+	4'b0011: begin
+			  LUT_R <=8'hff;
+			  LUT_G <=8'ha0;
+			  LUT_B <=8'h44;
+			  end
+			  
+	4'b0100: begin
+			  LUT_R <=8'he4;
+			  LUT_G <=8'h5c;
+			  LUT_B <=8'h10;
+			  end
+			  
+	4'b0101: begin
+			  LUT_R <=8'h0a;
+			  LUT_G <=8'hc7;
+			  LUT_B <=8'hc0;
+			  end
+			  
+	4'b0110: begin
+			  LUT_R <=8'h0f;
+			  LUT_G <=8'h83;
+			  LUT_B <=8'h80;
+			  end
+			  
+	4'b0111: begin
+			  LUT_R <=8'h00;
+			  LUT_G <=8'h00;
+			  LUT_B <=8'h80;
+			  end
+			  
+	4'b1000: begin
+			  LUT_R <=8'h00;
+			  LUT_G <=8'h0a;
+			  LUT_B <=8'h80;
+			  end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module fireballTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'hff;
+			 LUT_B <=8'hff;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'h83;
+			 LUT_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'ha0;
+			 LUT_B <=8'h44;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module flagpoleTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h04;
+			 LUT_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h0a;
+			 LUT_G <=8'h4b;
+			 LUT_B <=8'hc0;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'h1c;
+			 LUT_G <=8'h84;
+			 LUT_B <=8'h14;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module floorBlockTable (
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_comb
+ begin 
+	case (in)
+	4'h0: begin
+			 LUT_R =8'h00;
+			 LUT_G =8'h00;
+			 LUT_B =8'h00;
+			 end
+			 
+	4'h1: begin
+			 LUT_R =8'hff;
+			 LUT_G =8'hce;
+			 LUT_B =8'hc6;
+			 end
+			 
+	4'h2: begin //may be wrong
+			 LUT_R =8'h9c;
+			 LUT_G =8'h4a;
+			 LUT_B =8'h00;
+			 end
+	default: begin
+			LUT_R =8'h00;
+			LUT_G =8'h00;
+			LUT_B =8'h00;
+			end
+	
+	endcase
+		
+ end
+endmodule
+
+//////////////////////////////////////
+
+module gombaTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'he4;
+			 LUT_G <=8'h58;
+			 LUT_B <=8'h10;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h20;
+			 LUT_G <=8'h20;
+			 LUT_B <=8'h20;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'hf4;
+			 LUT_G <=8'hd4;
+			 LUT_B <=8'hb4;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module koopaTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'ha0;
+			 LUT_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h0a;
+			 LUT_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'hff;
+			 LUT_B <=8'hff;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module BigMarioTable (
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_comb
+ begin 
+	case (in)
+	4'h0: begin
+			 LUT_R =8'hf0;
+			 LUT_G =8'h0f;
+			 LUT_B =8'he4;
+			 end
+			 
+	4'h1: begin
+			 LUT_R =8'hb1;
+			 LUT_G =8'h34;
+			 LUT_B =8'h25;
+			 end
+			 
+	4'h2: begin
+			 LUT_R =8'he3;
+			 LUT_G =8'h9d;
+			 LUT_B =8'h25;
+			 end
+			 
+	4'h3: begin
+			 LUT_R =8'h6a;
+			 LUT_G =8'h6b;
+			 LUT_B =8'h04;
+			 end
+	default: begin
+			LUT_R =8'h00;
+			LUT_G =8'h00;
+			LUT_B =8'h00;
+			end
+	
+	endcase
+		
+ end
+endmodule
+
+//////////////////////////////////////
+
+module mushroomTable (
+	input logic [3:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_comb
+ begin 
+	case (in)
+	4'h0: begin
+			 LUT_R =8'hf0;
+			 LUT_G =8'h0f;
+			 LUT_B =8'he4;
+			 end
+			 
+	4'h1: begin
+			 LUT_R =8'hff;
+			 LUT_G =8'ha0;
+			 LUT_B =8'h44;
+			 end
+			 
+	4'h2: begin
+			 LUT_R =8'h0f;
+			 LUT_G =8'h83;
+			 LUT_B =8'h80;
+			 end
+			 
+	4'h3: begin
+			 LUT_R =8'hff;
+			 LUT_G =8'hff;
+			 LUT_B =8'hff;
+			 end
+	default: begin
+			LUT_R =8'h00;
+			LUT_G =8'h00;
+			LUT_B =8'h00;
+			end
+	
+	endcase
+		
+ end
+endmodule
+////////////////////////////////////////////////////
+
+module SmallMarioTable (
+	input logic [3:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_comb
+ begin 
+	case (in)
+	4'h0: begin
+			 LUT_R =8'hf0;
+			 LUT_G =8'h0f;
+			 LUT_B =8'he4;
+			 end
+			 
+	4'h1: begin
+			 LUT_R =8'hb1;
+			 LUT_G =8'h34;
+			 LUT_B =8'h25;
+			 end
+			 
+	4'h2: begin
+			 LUT_R =8'he3;
+			 LUT_G =8'h9d;
+			 LUT_B =8'h25;
+			 end
+			 
+	4'h3: begin
+			 LUT_R =8'h6a;
+			 LUT_G =8'h6b;
+			 LUT_B =8'h04;
+			 end
+	default: begin
+			LUT_R =8'h00;
+			LUT_G =8'h00;
+			LUT_B =8'h00;
+			end
+	
+	endcase
+		
+ end
+endmodule
+
+//////////////////////////////////////
+
+
+//////////////////////////////////////
+
+module mysteryBlockTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	3'b000: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h00;
+			 LUT_B <=8'h00;
+			 end
+			 
+	3'b001: begin
+			 LUT_R <=8'he7;
+			 LUT_G <=8'h5a;
+			 LUT_B <=8'h10;
+			 end
+			 
+	3'b010: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	3'b011: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'ha5;
+			 LUT_B <=8'h42;
+			 end
+			 
+	3'b100: begin
+			 LUT_R <=8'h08;
+			 LUT_G <=8'hc1;
+			 LUT_B <=8'h00;
+			 end
+			 
+	3'b101: begin
+			 LUT_R <=8'h09;
+			 LUT_G <=8'hc4;
+			 LUT_B <=8'ha0;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+
+module oneUpMushroomTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	2'b00: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	2'b01: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'ha0;
+			 LUT_B <=8'h44;
+			 end
+			 
+	2'b10: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h0a;
+			 LUT_B <=8'h80;
+			 end
+			 
+	2'b11: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'hff;
+			 LUT_B <=8'hff;
+			 end
+	endcase
+endmodule
+
+//////////////////////////////////////
+//////////////////////////
+
+module starTable (
+	input logic clk,
+	input logic [1:0] in,
+	output logic [7:0] LUT_R, LUT_G, LUT_B
+);
+
+always_ff @ (negedge clk)
+	case (in)
+	3'b000: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'hf0;
+			 LUT_B <=8'he4;
+			 end
+			 
+	3'b001: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'ha0;
+			 LUT_B <=8'h44;
+			 end
+			 
+	3'b010: begin
+			 LUT_R <=8'he4;
+			 LUT_G <=8'h5c;
+			 LUT_B <=8'h10;
+			 end
+			 
+	3'b011: begin
+			 LUT_R <=8'h0f;
+			 LUT_G <=8'h83;
+			 LUT_B <=8'h80;
+			 end
+	
+	3'b100: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h0a;
+			 LUT_B <=8'h80;
+			 end
+			 
+	3'b101: begin
+			 LUT_R <=8'h00;
+			 LUT_G <=8'h00;
+			 LUT_B <=8'h80;
+			 end
+			 
+	3'b110: begin
+			 LUT_R <=8'hff;
+			 LUT_G <=8'he0;
+			 LUT_B <=8'ha8;
+			 end
+	endcase
+endmodule
+///////////////
