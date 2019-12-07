@@ -1,0 +1,138 @@
+		.Pipe_R_In(Pipe_R),
+		.Pipe_G_In(Pipe_G),
+		.Pipe_B_In(Pipe_B),
+    
+    .Is_Pipe1,
+		.Is_Pipe2,
+		.Is_Pipe3,
+		.Is_Pipe4,
+		.Is_Pipe5,
+		.Is_Pipe6,
+		.Is_Pipe7,
+		.Is_Pipe8,
+		.Is_Pipe9,
+		.Is_Pipe10,
+		.Is_Pipe11,
+		.Is_Pipe12,
+		.Is_Pipe13,
+		.Is_Pipe14,
+		.Is_Pipe15,
+		.Is_Pipe16,
+		.Is_Pipe17,
+		.Is_Pipe18,
+		.Is_Pipe19,
+		.Is_Pipe20,
+		.Is_Pipe21,
+		.Is_Pipe22,
+		.Is_Pipe23,
+		.Is_Pipe24,
+		.Is_Pipe25,
+		.Is_Pipe26,
+		.Is_Pipe27,
+		.Is_Pipe28,
+		.Is_Pipe29,
+		.Is_Pipe30,
+		.Is_Pipe31,
+		.Is_Pipe32,
+		.Is_Pipe33,
+		.Is_Pipe34,
+
+
+/////////////////////////////////////////////////////////////////////////
+ROM_UL_Pipe UL_Pipe_Sprite(
+		.READ_ADDR(UL_Pipe_ADDR),
+		.Clk(CLK),
+		.DATA_OUT(UL_Pipe_in)
+		);
+
+ROM_UR_Pipe UR_Pipe_Sprite(
+		.READ_ADDR(UR_Pipe_ADDR),
+		.Clk(CLK),
+		.DATA_OUT(UR_Pipe_in)
+		);
+		
+ROM_LL_Pipe LL_Pipe_Sprite(
+		.READ_ADDR(LL_Pipe_ADDR),
+		.Clk(CLK),
+		.DATA_OUT(LL_Pipe_in)
+		);
+		
+ROM_LR_Pipe LR_Pipe_Sprite(
+		.READ_ADDR(LR_Pipe_ADDR),
+		.Clk(CLK),
+		.DATA_OUT(LR_Pipe_in)
+		);
+		
+PipeMux SortPipeType(
+		.Select({Is_LR, Is_LL, Is_UR, IS_UL}),
+		.UL_Data(UL_Pipe_in),
+		.UR_Data(UR_Pipe_in),
+		.LL_Data(LL_Pipe_in),
+		.LR_Data(LR_Pipe_in),
+		.Output(Pipe_in)
+		);
+		
+UPipeMux SortULPipe(
+		.Select({Is_Pipe31, Is_Pipe27, Is_Pipe19, Is_Pipe11, Is_Pipe5, Is_Pipe1}),
+		.A1(Pipe1_ADDR),
+		.A2(Pipe5_ADDR),
+		.A3(Pipe11_ADDR),
+		.A4(Pipe19_ADDR),
+		.A5(Pipe27_ADDR),
+		.A6(Pipe31_ADDR),
+		.Output(UL_Pipe_ADDR),
+		.ThisPipe(Is_UL)
+		);
+		
+UPipeMux SortURPipe(
+		.Select({Is_Pipe33, Is_Pipe29, Is_Pipe23, Is_Pipe15, Is_Pipe8, Is_Pipe3}),
+		.A1(Pipe3_ADDR),
+		.A2(Pipe8_ADDR),
+		.A3(Pipe15_ADDR),
+		.A4(Pipe23_ADDR),
+		.A5(Pipe29_ADDR),
+		.A6(Pipe33_ADDR),
+		.Output(UR_Pipe_ADDR),
+		.ThisPipe(Is_UR)
+		);
+
+LPipeMux SortLLPipe(
+		.Select({Is_Pipe32,Is_Pipe28,Is_Pipe22,Is_Pipe21,Is_Pipe20,Is_Pipe14,Is_Pipe13,Is_Pipe12,Is_Pipe7,Is_Pipe6,Is_Pipe2}),
+		.A1(Pipe2_ADDR),
+		.A2(Pipe6_ADDR),
+		.A3(Pipe7_ADDR),
+		.A4(Pipe12_ADDR),
+		.A5(Pipe13_ADDR),
+		.A6(Pipe14_ADDR),
+		.A7(Pipe20_ADDR),
+		.A8(Pipe21_ADDR),
+		.A9(Pipe22_ADDR),
+		.A10(Pipe28_ADDR),
+		.A11(Pipe32_ADDR),
+		.Output(LL_Pipe_ADDR),
+		.ThisPipe(Is_LL)
+		);
+		
+LPipeMux SortLRPipe(
+		.Select({Is_Pipe34,Is_Pipe30,Is_Pipe26,Is_Pipe25,Is_Pipe24,Is_Pipe18,Is_Pipe17,Is_Pipe16,Is_Pipe10,Is_Pipe9,Is_Pipe4}),
+		.A1(Pipe4_ADDR),
+		.A2(Pipe9_ADDR),
+		.A3(Pipe10_ADDR),
+		.A4(Pipe16_ADDR),
+		.A5(Pipe17_ADDR),
+		.A6(Pipe18_ADDR),
+		.A7(Pipe24_ADDR),
+		.A8(Pipe25_ADDR),
+		.A9(Pipe26_ADDR),
+		.A10(Pipe30_ADDR),
+		.A11(Pipe34_ADDR),
+		.Output(LR_Pipe_ADDR),
+		.ThisPipe(Is_LR)
+		);
+		
+PipeTable Pipe_Color(
+			.in(Pipe_in),
+			.LUT_R(Pipe_R),
+			.LUT_G(Pipe_G),
+			.LUT_B(Pipe_B)
+		);
