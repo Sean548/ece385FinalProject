@@ -1,0 +1,41 @@
+
+module ADDRMux(input logic [12:0] Select,
+				   input logic [9:0] Gomba1, Gomba2, Gomba3, Gomba4, Gomba5, Gomba6, Gomba7, Gomba8, Gomba9, Gomba10, Gomba11, Gomba12, Gomba13,
+					output logic [9:0] Output);
+
+
+		always_comb 
+		begin
+			case(Select)
+				13'b0000000000001:
+					Output = Gomba1;
+				13'b0000000000010:
+					Output = Gomba2;
+				13'b0000000000100:
+					Output = Gomba3;
+				13'b0000000001000:
+					Output = Gomba4;
+				13'b0000000010000:
+					Output = Gomba5;
+				13'b0000000100000:
+					Output = Gomba6;
+				13'b0000001000000:
+					Output = Gomba7;
+				13'b0000010000000:
+					Output = Gomba8;
+				13'b0000100000000:
+					Output = Gomba9;
+				13'b0001000000000:
+					Output = Gomba10;
+				13'b0010000000000:
+					Output = Gomba11;
+				13'b0100000000000:
+					Output = Gomba12;
+				13'b1000000000000:
+					Output = Gomba13;
+				default:
+					Output = Gomba1;
+			endcase
+		end
+endmodule 
+//
