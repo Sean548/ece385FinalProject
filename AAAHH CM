@@ -1,0 +1,84 @@
+//-------------------------------------------------------------------------
+//    Color_Mapper.sv                                                    --
+//    Stephen Kempf                                                      --
+//    3-1-06                                                             --
+//                                                                       --
+//    Modified by David Kesler  07-16-2008                               --
+//    Translated by Joe Meng    07-07-2013                               --
+//    Modified by Po-Han Huang  10-06-2017                               --
+//                                                                       --
+//    Fall 2017 Distribution                                             --
+//                                                                       --
+//    For use with ECE 385 Lab 8                                         --
+//    University of Illinois ECE Department                              --
+//-------------------------------------------------------------------------
+
+// color_mapper: Decide which color to be output to VGA for each pixel.
+module  Color_Mapper ( input 		  CLK,
+							  input [9:0] DrawX, DrawY,
+							  output logic [7:0] VGA_R, VGA_G, VGA_B
+
+							  input       Is_Mario,
+							  input [7:0] Mario_R_In,Mario_G_In,Mario_B_In,
+
+							  input       Is_Block1,Is_Block2,Is_Block3,Is_Block4,
+											  Is_Block5,Is_Block6,Is_Block7,Is_Block8,
+											  Is_Block9,Is_Block10,Is_Block11,Is_Block12,
+											  Is_Block13,Is_Block14,Is_Block15,Is_Block16,
+											  Is_Block17,Is_Block18,Is_Block19,Is_Block20,
+											  Is_Block21,Is_Block22,Is_Block23,Is_Block24,
+											  Is_Block25,Is_Block26,Is_Block27,Is_Block28,
+											  Is_Block29,Is_Block30,
+											  
+							  input [7:0] Block1_R_In,Block1_G_In,Block1_B_In,
+											  
+							  input       Is_Gomba1,Is_Gomba2,Is_Gomba3,Is_Gomba4,
+											  Is_Gomba5,Is_Gomba6,Is_Gomba7,
+											  Is_Gomba8,Is_Gomba9,Is_Gomba10,
+											  Is_Gomba11,Is_Gomba12,Is_Gomba13, 
+											  
+							  input [7:0] Gomba_R_In,Gomba_G_In,Gomba_B_In,
+
+                     );
+    logic [7:0] Red, Green, Blue;
+	 int SizeX;
+//	 assign SizeX = 640;
+    
+    // Output colors to VGA
+    assign VGA_R = Red;
+    assign VGA_G = Green;
+    assign VGA_B = Blue;
+  
+
+    // Assign color based on Is_Mario signal
+    always_comb
+    begin
+		  Red = 8'h04; 
+        Green = 8'h9c;
+        Blue = 8'hab;
+		  
+        if((Is_Mario == 1'b1)&&(Mario_R_In!=8'hf0) && (Mario_G_In != 8'h0f) && (Mario_B_In != 8'he4)) 
+			begin
+					Red = Mario_R_In;
+					Green = Mario_G_In;
+					Blue = Mario_B_In;
+			end
+		  else if(((Is_Block1||Is_Block2||Is_Block3||Is_Block4||Is_Block5||Is_Block6||Is_Block7||Is_Block8||Is_Block9||Is_Block10||Is_Block11||Is_Block12||
+					  Is_Block13||Is_Block14||Is_Block15||Is_Block16||Is_Block17||Is_Block18||Is_Block19||Is_Block20||Is_Block21||Is_Block22||Is_Block23||Is_Block24||
+					  Is_Block25||Is_Block26||Is_Block27||Is_Block28||Is_Block29||Is_Block30) == 1'b1)&&(Block1_R_In!=8'hf0) && (Block1_G_In != 8'h0f) && (Block_B_In != 8'he4))
+		  begin
+				Red = Block1_R_In;
+				Green = Block1_G_In;
+				Blue = Block1_B_In;
+		  end
+		  else if(((Is_Gomba1||Is_Gomba2||Is_Gomba3||Is_Gomba4||Is_Gomba5||Is_Gomba6||Is_Gomba7||Is_Gomba8||Is_Gomba9||Is_Gomba10||Is_Gomba11||Is_Gomba12||Is_Gomba13)== 1'b1)&&(Gomba1_R_In!=8'hf0) && (Gomba1_G_In != 8'h0f) && (Gomba1_B_In != 8'he4)
+		  begin
+				Red = Gomba_R_In;
+				Green = Gomba_G_In;
+				Blue = Gomba_B_In;
+		  end
+            // Background with nice color gradient
+    end 
+
+	 
+endmodule 
