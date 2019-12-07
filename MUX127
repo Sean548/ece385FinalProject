@@ -1,0 +1,170 @@
+
+module ADDRMux(input logic [12:0] Select,
+				   input logic [9:0] Gomba1, Gomba2, Gomba3, Gomba4, Gomba5, Gomba6, Gomba7, Gomba8, Gomba9, Gomba10, Gomba11, Gomba12, Gomba13,
+					output logic [9:0] Output);
+
+
+		always_comb 
+		begin
+			case(Select)
+				13'b0000000000001:
+					Output = Gomba1;
+				13'b0000000000010:
+					Output = Gomba2;
+				13'b0000000000100:
+					Output = Gomba3;
+				13'b0000000001000:
+					Output = Gomba4;
+				13'b0000000010000:
+					Output = Gomba5;
+				13'b0000000100000:
+					Output = Gomba6;
+				13'b0000001000000:
+					Output = Gomba7;
+				13'b0000010000000:
+					Output = Gomba8;
+				13'b0000100000000:
+					Output = Gomba9;
+				13'b0001000000000:
+					Output = Gomba10;
+				13'b0010000000000:
+					Output = Gomba11;
+				13'b0100000000000:
+					Output = Gomba12;
+				13'b1000000000000:
+					Output = Gomba13;
+				default:
+					Output = Gomba1;
+			endcase
+		end
+endmodule 
+//
+
+module PipeMux(input [1:0] Select,
+					input [3:0] UL_Data,UR_Data,LL_Data,LR_Data,
+					output [3:0] Output
+					);			
+		always_comb
+		begin
+			case(Select)
+				4'b0001:
+					Output = UL_Data;
+				4'b0010:
+				Output = UR_Data;
+				4'b0100:
+					Output = LL_Data;
+				4'b1000:
+					Output = LR_Data;
+				default:
+					Output = UL_Data;
+			endcase
+		end
+endmodule
+
+module UPipeMux(input [5:0] Select,
+					 input [9:0] A1,A2,A3,A4,A5,A6,
+					 output [9:0] Output
+					 output logic ThisPipe
+					 );
+		always_comb
+		begin
+			case(Select)
+				6'b000001:
+					begin
+					Output = A1;
+					ThisPipe = 1'b1;
+					end
+				6'b000010:
+					begin
+					Output = A2;
+					ThisPipe = 1'b1;
+					end
+				6'b000100:
+					begin
+					Output = A3;
+					ThisPipe = 1'b1;
+					end
+				6'b001000:
+					begin
+					Output = A4;
+					ThisPipe = 1'b1;
+					end
+				6'b010000:
+					begin
+					Output = A5;
+					ThisPipe = 1'b1;
+					end
+				6'b100000:
+				default:
+					begin
+					Output = A1;
+					ThisPipe = 1'b0;
+					end
+					
+module LPipeMux(input [10:0] Select,
+					 input [9:0] A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,
+					 output [9:0] Output
+					 output ThisPipe
+					 );
+		always_comb
+			begin
+				case(Select)
+					11'b00000000001:
+					begin
+						Output = A1;
+						ThisPipe = 1'b1;
+					end
+					11'b00000000010:
+					begin
+						Output = A2;
+						ThisPipe = 1'b1;
+					end
+					11'b00000000100:
+					begin
+						Output = A3;
+						ThisPipe = 1'b1;
+					end
+					11'b00000001000:
+					begin
+						Output = A4;
+						ThisPipe = 1'b1;
+					end
+					11'b00000010000:
+					begin
+						Output = A5;
+						ThisPipe = 1'b1;
+					end
+					11'b00000100000:
+					begin
+						Output = A6;
+						ThisPipe = 1'b1;
+					end
+					11'b00001000000:
+					begin
+						Output = A7;
+						ThisPipe = 1'b1;
+					end
+					11'b00010000000:
+					begin
+						Output = A8;
+						ThisPipe = 1'b1;
+					11'b00100000000:
+					begin
+						Output = A9;
+						ThisPipe = 1'b1;
+					end
+					11'b01000000000:
+					begin
+						Output = A10;
+						ThisPipe = 1'b1;
+					end
+					11'b10000000000:
+					begin
+						Output = A11;
+						ThisPipe = 1'b1;
+					end
+					default:
+						begin
+						Output = A1;
+						ThisPipe = 1'b0;
+						end
