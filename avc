@@ -1,0 +1,10 @@
+logic [3:0] UL_Pipe_in,UR_Pipe_in,LL_Pipe_in,LR_Pipe_in;
+
+logic Is_UL, Is_UR, Is_LL, Is_LR;
+
+UL_Pipe_ADDR,
+				UR_Pipe_ADDR,
+				LL_Pipe_ADDR,
+				LR_Pipe_ADDR;
+        
+  Pipe_in,
